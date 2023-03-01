@@ -1,0 +1,22 @@
+---
+name: SLSA Provenance
+on:
+  - workflow_dispatch
+
+permissions: read-all
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  ISSUE_REPOSITORY: ${{ github.repository }}
+jobs:
+  usetrw:
+    permissions:
+      contents: write
+      id-token: write
+      actions: read   # For the entrypoint.
+      packages: write
+    uses: AdamKorcz/java-slsa-generator/.github/workflows/gradle-trw.yml@main
+    with:
+      name1: value1
+      name2: value2
+      rekor-log-public: true
